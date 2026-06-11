@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meryem ❤️</title>
+
+<style>
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  min-height:100vh;
+  background:linear-gradient(135deg,#ff4f9a,#ff8fc7,#ffd1e3);
+  font-family:Arial,sans-serif;
+  color:white;
+  text-align:center;
+  overflow-x:hidden;
+}
+
+h1{
+  font-size:54px;
+  margin:28px 0 8px;
+  text-shadow:0 4px 18px rgba(0,0,0,.18);
+}
+
+p{
+  font-size:22px;
+  line-height:1.4;
+}
+
+.card{
+  width:90%;
+  max-width:520px;
+  margin:16px auto;
+  padding:16px;
+  border-radius:24px;
+  background:rgba(255,255,255,.18);
+  box-shadow:0 0 25px rgba(255,255,255,.25);
+  backdrop-filter:blur(6px);
+}
+
+#sayac{
+  font-weight:bold;
+  font-size:22px;
+}
+
+#slider{
+  width:90%;
+  max-width:520px;
+  height:440px;
+  margin:18px auto;
+  overflow:hidden;
+  border-radius:28px;
+  box-shadow:0 0 35px rgba(255,255,255,.55);
+  background:rgba(255,255,255,.18);
+}
+
+#foto{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  transition:opacity .6s ease;
+}
+
+button{
+  padding:15px 24px;
+  margin:8px;
+  border:none;
+  border-radius:24px;
+  background:white;
+  color:#ff2f85;
+  font-size:19px;
+  font-weight:bold;
+  box-shadow:0 6px 18px rgba(0,0,0,.12);
+}
+
+.heart{
+  position:fixed;
+  pointer-events:none;
+  z-index:9999;
+}
+
+.balloon{
+  position:fixed;
+  bottom:-80px;
+  font-size:38px;
+  pointer-events:none;
+  animation:balloonFly 5s linear forwards;
+  z-index:9998;
+}
+
+@keyframes balloonFly{
+  0%{
+    transform:translateY(0) scale(.8);
+    opacity:1;
+  }
+  80%{
+    opacity:1;
+  }
+  100%{
+    transform:translateY(-115vh) scale(1.2);
+    opacity:0;
+  }
+}
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.45);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  z-index:10000;
+}
+
+.modal-content{
+  background:white;
+  color:#ff2f85;
+  border-radius:28px;
+  max-width:420px;
+  padding:24px;
+  box-shadow:0 0 40px rgba(255,255,255,.45);
+}
+
+.modal-content h2{
+  margin-top:0;
+}
+
+.modal-content p{
+  color:#333;
+  font-size:18px;
+}
+
+.close{
+  margin-top:12px;
+  background:#ff2f85;
+  color:white;
+}
+</style>
+</head>
+
+<body>
+
+<audio id="music" loop>
+  <source src="sarki.mp3" type="audio/mpeg">
+</audio>
+
+<h1>Meryem ❤️</h1>
+
+<p>12 Eylül 2025'ten beri ❤️</p>
+<p>10 aydır beraberiz 💕</p>
+
+<div class="card">
+  <h2>1. Yılımıza Kalan Süre ⏳</h2>
+  <p id="sayac"></p>
+</div>
+
+<div id="slider">
+  <img id="foto" src="foto1.jpg" alt="Bizim fotoğrafımız">
+</div>
+
+<div class="card">
+  <button onclick="muzik()">🎵 Müziği Başlat</button>
+  <button onclick="mesajAc()">💌 Özel Mesaj</button>
+  <button onclick="kalp()">❤️ Kalp Patlat</button>
+  <button onclick="balon()">🎈 Balon Patlat</button>
+</div>
+
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <h2>Meryem’e Özel 💌</h2>
+    <p>
+      Meryem, seni çok seviyorum. 12 Eylül 2025’ten beri hayatımdaki en güzel şeylerden biri sensin.
+      Seninle geçen her gün benim için ayrı değerli. 1. yılımıza az kaldı ve ben nice yılları seninle yaşamak istiyorum.
+      İyi ki varsın, iyi ki benimlesin. ❤️
+    </p>
+    <button class="close" onclick="mesajKapat()">Kapat ❤️</button>
+  </div>
+</div>
+
+<script>
+const fotolar=[
+  "foto1.jpg",
+  "foto2.jpg",
+  "foto3.jpg",
+  "foto4.jpg",
+  "foto5.jpg"
+];
+
+let sira=0;
+
+setInterval(()=>{
+  const foto=document.getElementById("foto");
+  foto.style.opacity=0;
+  setTimeout(()=>{
+    sira=(sira+1)%fotolar.length;
+    foto.src=fotolar[sira];
+    foto.style.opacity=1;
+  },500);
+},3500);
+
+function muzik(){
+  const music=document.getElementById("music");
+  music.play().catch(()=>{
+    alert("Şarkı için sarki.mp3 dosyasını depoya yüklemen lazım ❤️");
+  });
+}
+
+function mesajAc(){
+  document.getElementById("modal").style.display="flex";
+  kalp();
+}
+
+function mesajKapat(){
+  document.getElementById("modal").style.display="none";
+}
+
+function sayac(){
+  const hedef=new Date("2026-09-12T00:00:00").getTime();
+  const simdi=new Date().getTime();
+  const fark=hedef-simdi;
+
+  if(fark<=0){
+    document.getElementById("sayac").innerHTML="1. yılımız kutlu olsun sevgilim ❤️";
+    return;
+  }
+
+  const gun=Math.floor(fark/(1000*60*60*24));
+  const saat=Math.floor((fark%(1000*60*60*24))/(1000*60*60));
+  const dakika=Math.floor((fark%(1000*60*60))/(1000*60));
+  const saniye=Math.floor((fark%(1000*60))/1000);
+
+  document.getElementById("sayac").innerHTML =
+  gun+" gün "+saat+" saat "+dakika+" dakika "+saniye+" saniye kaldı ❤️";
+}
+
+setInterval(sayac,1000);
+sayac();
+
+function kalp(){
+  for(let i=0;i<55;i++){
+    let h=document.createElement("div");
+    h.className="heart";
+    h.innerHTML="❤️";
+    h.style.left="50%";
+    h.style.top="50%";
+    h.style.fontSize=(18+Math.random()*32)+"px";
+
+    document.body.appendChild(h);
+
+    let x=(Math.random()-0.5)*850;
+    let y=(Math.random()-0.5)*850;
+
+    h.animate([
+      {transform:"translate(-50%,-50%) scale(.4)", opacity:1, filter:"blur(0px)"},
+      {transform:`translate(calc(-50% + ${x}px), calc(-50% + ${y}px)) scale(1.3)`, opacity:.75, filter:"blur(1px)"},
+      {transform:`translate(calc(-50% + ${x*1.2}px), calc(-50% + ${y*1.2}px)) scale(0)`, opacity:0, filter:"blur(7px)"}
+    ],{
+      duration:1600,
+      easing:"cubic-bezier(.16,1,.3,1)"
+    });
+
+    setTimeout(()=>h.remove(),1600);
+  }
+}
+
+function balon(){
+  for(let i=0;i<20;i++){
+    let b=document.createElement("div");
+    b.className="balloon";
+    b.innerHTML=["🎈","💗","❤️","💕"][Math.floor(Math.random()*4)];
+    b.style.left=Math.random()*100+"vw";
+    b.style.animationDelay=(Math.random()*1.2)+"s";
+    b.style.fontSize=(28+Math.random()*22)+"px";
+    document.body.appendChild(b);
+
+    setTimeout(()=>b.remove(),6200);
+  }
+}
+</script>
+
+</body>
+</html>
